@@ -37,6 +37,9 @@ public class Client implements Serializable{
 	@ElementCollection
 	@CollectionTable(name = "fone")
 	private Set<String> fone = new HashSet<>();
+	
+	@OneToMany(mappedBy = "client")
+	private List<Request> request = new ArrayList<>();
 
 	public Client() {
 	}
@@ -96,6 +99,9 @@ public class Client implements Serializable{
 
 	public Set<String> getFone() {
 		return fone;
+	}
+	public List<Request> getRequest() {
+		return request;
 	}
 
 	@Override
