@@ -7,12 +7,17 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.tsa.ApiMC.entities.Address;
 import com.tsa.ApiMC.entities.Category;
 import com.tsa.ApiMC.entities.City;
+import com.tsa.ApiMC.entities.Client;
 import com.tsa.ApiMC.entities.Product;
 import com.tsa.ApiMC.entities.State;
+import com.tsa.ApiMC.entities.enums.ClientType;
+import com.tsa.ApiMC.repository.AddressRepository;
 import com.tsa.ApiMC.repository.CategoryRepository;
 import com.tsa.ApiMC.repository.CityRepository;
+import com.tsa.ApiMC.repository.ClientRepository;
 import com.tsa.ApiMC.repository.ProductRepository;
 import com.tsa.ApiMC.repository.StateRepository;
 
@@ -30,6 +35,12 @@ public class ApiMcApplication implements CommandLineRunner {
 	
 	@Autowired
 	private StateRepository stateReposytory;
+	
+	@Autowired
+	private ClientRepository clientReposytory;
+	
+	@Autowired
+	private AddressRepository addressReposytory;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ApiMcApplication.class, args);
@@ -68,7 +79,16 @@ public class ApiMcApplication implements CommandLineRunner {
 		stateReposytory.saveAll(Arrays.asList(est1,est2));
 		cityReposytory.saveAll(Arrays.asList(c1,c2,c3));
 		
-	
+		Client cli1 = new Client(null, "Maria Silva", "maria@gmail.com", "36378912377", ClientType.PessoaFisica);
+		cli1.getFone().addAll(Arrays.asList("27368954","872524552"));
+		
+		Address e1 = new Address(null,"Rua Flores","300","Apto 203","jardim", "98959484784", cli1, c1);
+		Address e2 = new Address(null,"Avenida Matos","105","Sala 800","centro", "9858249698", cli1, c2);
+		
+		cli1.getAddress().addAll(Arrays.asList(e1,e2));
+		
+		clientReposytory.saveAll(Arrays.asList(cli1));
+		addressReposytory.saveAll(Arrays.asList(e1,e2));
 		
 	}
 
