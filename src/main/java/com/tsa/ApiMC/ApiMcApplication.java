@@ -12,6 +12,7 @@ import com.tsa.ApiMC.entities.Address;
 import com.tsa.ApiMC.entities.Category;
 import com.tsa.ApiMC.entities.City;
 import com.tsa.ApiMC.entities.Client;
+import com.tsa.ApiMC.entities.OrderItem;
 import com.tsa.ApiMC.entities.Payment;
 import com.tsa.ApiMC.entities.PaymentBillet;
 import com.tsa.ApiMC.entities.PaymentCard;
@@ -24,6 +25,7 @@ import com.tsa.ApiMC.repository.AddressRepository;
 import com.tsa.ApiMC.repository.CategoryRepository;
 import com.tsa.ApiMC.repository.CityRepository;
 import com.tsa.ApiMC.repository.ClientRepository;
+import com.tsa.ApiMC.repository.OrderItemRepository;
 import com.tsa.ApiMC.repository.PaymentRepository;
 import com.tsa.ApiMC.repository.ProductRepository;
 import com.tsa.ApiMC.repository.RequestRepository;
@@ -55,6 +57,9 @@ public class ApiMcApplication implements CommandLineRunner {
 	
 	@Autowired
 	private PaymentRepository paymentRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ApiMcApplication.class, args);
@@ -119,6 +124,19 @@ public class ApiMcApplication implements CommandLineRunner {
 		
 		requestRepository.saveAll(Arrays.asList(ped1,ped2));
 		paymentRepository.saveAll(Arrays.asList(pagto1,pagto2));
+		
+		OrderItem ip1 = new OrderItem(ped1, p1, 0.00, 1, 2000.00);
+		OrderItem ip2 = new OrderItem(ped1, p3, 0.00, 2, 80.00);
+		OrderItem ip3 = new OrderItem(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1,ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		orderItemRepository.saveAll(Arrays.asList(ip1,ip2,ip3));
 		
 	}
 
