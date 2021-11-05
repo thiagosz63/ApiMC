@@ -15,13 +15,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tsa.ApiMC.entities.enums.ClientType;
 
 @Entity
-public class Client implements Serializable{
+public class Client implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -32,15 +30,14 @@ public class Client implements Serializable{
 	private String cpfOuCnpj;
 	private Integer type;
 
-	@JsonManagedReference
 	@OneToMany(mappedBy = "client")
 	private List<Address> address = new ArrayList<>();
-	
+
 	@ElementCollection
 	@CollectionTable(name = "fone")
 	private Set<String> fone = new HashSet<>();
-	
-	@JsonBackReference
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "client")
 	private List<Request> request = new ArrayList<>();
 
@@ -103,6 +100,7 @@ public class Client implements Serializable{
 	public Set<String> getFone() {
 		return fone;
 	}
+
 	public List<Request> getRequest() {
 		return request;
 	}

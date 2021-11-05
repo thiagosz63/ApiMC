@@ -17,39 +17,36 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Request implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date instante;
-	
-	@JsonManagedReference
+
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "request")
 	private Payment payment;
-	
-	@JsonManagedReference
+
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private Client client;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "enderecoEnrega_id")
 	private Address enderecoEntrega;
 	@OneToMany(mappedBy = "id.request")
 	private Set<OrderItem> itens = new HashSet<>();
-	
+
 	public Request() {
 	}
 
-	public Request(Integer id, Date instante,Client client, Address enderecoEntrega) {
+	public Request(Integer id, Date instante, Client client, Address enderecoEntrega) {
 		super();
 		this.id = id;
 		this.instante = instante;
@@ -96,6 +93,7 @@ public class Request implements Serializable {
 	public void setEnderecoEntrega(Address enderecoEntrega) {
 		this.enderecoEntrega = enderecoEntrega;
 	}
+
 	public Set<OrderItem> getItens() {
 		return itens;
 	}
