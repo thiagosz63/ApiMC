@@ -18,8 +18,8 @@ public class RequestController {
 	private RequestService service;
 
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Request obj = service.buscar(id);
+	public ResponseEntity<Request> find(@PathVariable Integer id) {
+		Request obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 }
