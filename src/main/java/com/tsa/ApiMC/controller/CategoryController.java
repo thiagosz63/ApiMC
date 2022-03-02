@@ -1,6 +1,7 @@
 package com.tsa.ApiMC.controller;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.tsa.ApiMC.dto.CategoryDTO;
 import com.tsa.ApiMC.entities.Category;
 import com.tsa.ApiMC.service.CategoryService;
 
@@ -48,6 +50,11 @@ public class CategoryController {
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
-		
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<CategoryDTO>> findAll() {
+		List <CategoryDTO> list = service.findAll();
+		return ResponseEntity.ok().body(list);
 	}
 }
