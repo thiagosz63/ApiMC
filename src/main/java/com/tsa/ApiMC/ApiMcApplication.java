@@ -68,8 +68,13 @@ public class ApiMcApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Category cat1 = new Category(null, "informatica");
-		Category cat2 = new Category(null, "escritorio");
+		Category cat1 = new Category(null, "Informatica");
+		Category cat2 = new Category(null, "Escritorio");
+		Category cat3 = new Category(null, "Cama mesa e Banho");
+		Category cat4 = new Category(null, "Eletronicos");
+		Category cat5 = new Category(null, "Jardinagem");
+		Category cat6 = new Category(null, "Decoração");
+		Category cat7 = new Category(null, "Perfumação");
 		
 		Product p1 = new Product(null, "computador", 2000.00);
 		Product p2 = new Product(null, "impressora", 800.00);
@@ -82,7 +87,7 @@ public class ApiMcApplication implements CommandLineRunner {
 		p2.getCategories().addAll(Arrays.asList(cat1,cat2));
 		p3.getCategories().addAll(Arrays.asList(cat1));
 		
-		categoryReposytory.saveAll(Arrays.asList(cat1,cat2));
+		categoryReposytory.saveAll(Arrays.asList(cat1,cat2,cat3,cat4,cat5,cat6,cat7));
 		productReposytory.saveAll(Arrays.asList(p1,p2,p3));
 		
 		State est1 = new State(null, "Minas Gerais");

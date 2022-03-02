@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,10 +30,6 @@ public class CategoryService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"objeto não encontrado! id:" + id + " Tipo: " + Category.class.getName()));
 	}
-	public List<CategoryDTO> findAll() {
-		List<Category> list = repository.findAll();
-		return list.stream().map(x -> new CategoryDTO(x)).collect(Collectors.toList());
-	}
 
 	public Category insert(Category obj) {
 		return repository.save(obj);
@@ -49,6 +48,14 @@ public class CategoryService {
 		} catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Não é possivel excluir uma categoria que possua Produtos");
 		}
-
+	}
+	public List<CategoryDTO> findAll() {
+		List<Category> list = repository.findAll();
+		return list.stream().map(x -> new CategoryDTO(x)).collect(Collectors.toList());
+	}
+	public Page<CategoryDTO> findPage(Integer page, Integer linesPage, String direction, String orderBy){
+		PageRequest pageRequest = PageRequest.of(page, linesPage,Direction.valueOf(direction), orderBy);
+		Page<Category> pages =  repository.findAll(pageRequest);
+		return pages.map(x -> new CategoryDTO(x));
 	}
 }
