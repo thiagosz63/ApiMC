@@ -12,7 +12,13 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.tsa.ApiMC.dto.ClientDTO;
+import com.tsa.ApiMC.dto.ClientNewDTO;
+import com.tsa.ApiMC.entities.Address;
+import com.tsa.ApiMC.entities.City;
 import com.tsa.ApiMC.entities.Client;
+import com.tsa.ApiMC.entities.enums.ClientType;
+import com.tsa.ApiMC.repository.AddressRepository;
+import com.tsa.ApiMC.repository.CityRepository;
 import com.tsa.ApiMC.repository.ClientRepository;
 import com.tsa.ApiMC.service.exceptions.DataIntegrityException;
 import com.tsa.ApiMC.service.exceptions.ObjectNotFoundException;
@@ -22,6 +28,10 @@ public class ClientService {
 
 	@Autowired
 	private ClientRepository repository;
+	@Autowired
+	private CityRepository cityRepository;
+	@Autowired
+	private AddressRepository addressRepository;
 
 	public Client find(Integer id) {
 		Optional<Client> obj = repository.findById(id);
@@ -30,8 +40,9 @@ public class ClientService {
 	}
 
 	public Client insert(Client obj) {
-		return repository.save(obj);
-
+		obj = repository.save(obj);
+		addressRepository.saveAll(obj.getAddress());
+		return obj;
 	}
 
 	public Client update(Client obj) {
@@ -62,11 +73,32 @@ public class ClientService {
 
 	public Client fromDTO(ClientDTO objDTO) {
 		return new Client(objDTO.getId(), objDTO.getName(), objDTO.getEmail(), null, null);
-
 	}
+
+	public Client fromDTO(ClientNewDTO objDTO) {
+		Client cl1 = new Client(null, objDTO.getName(), objDTO.getEmail(), objDTO.getCpfOuCnpj(),
+				ClientType.toEnum(objDTO.getType()));
+
+		Optional<City> city = cityRepository.findById(objDTO.getCityId());
+
+		Address add = new Address(null, objDTO.getLogradouro(), objDTO.getNumber(), objDTO.getComplemento(),
+				objDTO.getBairro(), objDTO.getCep(), cl1, city.get());
+
+		cl1.getAddress().add(add);
+		cl1.getFone().add(objDTO.getFone1());
+		if (objDTO.getFone2() != null) {
+			cl1.getFone().add(objDTO.getFone2());
+		}
+		if (objDTO.getFone3() != null) {
+			cl1.getFone().add(objDTO.getFone3());
+		}
+		
+		return cl1;
+	}
+
 	private void updateData(Client newObj, Client obj) {
 		newObj.setName(obj.getName());
 		newObj.setEmail(obj.getEmail());
-		
+
 	}
 }

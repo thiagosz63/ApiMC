@@ -33,7 +33,6 @@ public class CategoryService {
 
 	public Category insert(Category obj) {
 		return repository.save(obj);
-
 	}
 
 	public Category update(Category obj) {
