@@ -2,19 +2,34 @@ package com.tsa.ApiMC.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+import com.tsa.ApiMC.service.validation.ClientInsert;
+@ClientInsert
 public class ClientNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
+	@NotEmpty(message = "Preenchimento Obligatorio")
+	@Size(min = 5, max = 120, message = "O campo deve conter entre 5 e 120 caracteres")
 	private String name;
+	@NotEmpty(message = "Preenchimento Obligatorio")
+	@Email(message = "Digite um email valido")
 	private String email;
+	@NotEmpty(message = "Preenchimento Obligatorio")
 	private String cpfOuCnpj;
 	private Integer type;
 
+	@NotEmpty(message = "Preenchimento Obligatorio")
 	private String logradouro;
+	@NotEmpty(message = "Preenchimento Obligatorio")
 	private String number;
 	private String complemento;
 	private String bairro;
+	@NotEmpty(message = "Preenchimento Obligatorio")
 	private String cep;
 
+	@NotEmpty(message = "Preenchimento Obligatorio")
 	private String fone1;
 	private String fone2;
 	private String fone3;
