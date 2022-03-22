@@ -8,7 +8,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import com.tsa.ApiMC.entities.Client;
+import com.tsa.ApiMC.service.validation.ClientUpdate;
 
+@ClientUpdate
 public class ClientDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
