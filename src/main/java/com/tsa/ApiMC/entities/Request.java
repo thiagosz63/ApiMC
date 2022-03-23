@@ -53,6 +53,13 @@ public class Request implements Serializable {
 		this.client = client;
 		this.enderecoEntrega = enderecoEntrega;
 	}
+	public double getValorTotal() {
+		double soma = 0.0;
+		for(OrderItem obj : itens) {
+			soma = soma+obj.getSubTotal();
+		}
+		return soma;
+	}
 
 	public Integer getId() {
 		return id;
