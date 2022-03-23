@@ -2,9 +2,11 @@ package com.tsa.ApiMC.entities;
 
 import javax.persistence.Entity;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.tsa.ApiMC.entities.enums.PaymentStatus;
 
 @Entity
+@JsonTypeName("pagamentoComCartao")
 public class PaymentCard extends Payment {
 
 	private static final long serialVersionUID = 1L;
