@@ -31,16 +31,19 @@ public class CategoryService {
 				"objeto não encontrado! id:" + id + " Tipo: " + Category.class.getName()));
 	}
 
+	@Transactional
 	public Category insert(Category obj) {
 		return repository.save(obj);
 	}
 
+	@Transactional
 	public Category update(Category obj) {
 		Category newObj = find(obj.getId());
 		updateData(newObj, obj);
 		return repository.save(newObj);
 	}
 
+	@Transactional
 	public void delete(Integer id) {
 		find(id);
 		try {
@@ -49,20 +52,25 @@ public class CategoryService {
 			throw new DataIntegrityException("Não é possivel excluir uma categoria que possua Produtos");
 		}
 	}
+
+	@Transactional(readOnly = true)
 	public List<CategoryDTO> findAll() {
 		List<Category> list = repository.findAll();
 		return list.stream().map(x -> new CategoryDTO(x)).collect(Collectors.toList());
 	}
-	public Page<CategoryDTO> findPage(Integer page, Integer linesPage, String direction, String orderBy){
-		PageRequest pageRequest = PageRequest.of(page, linesPage,Direction.valueOf(direction), orderBy);
-		Page<Category> pages =  repository.findAll(pageRequest);
+
+	@Transactional(readOnly = true)
+	public Page<CategoryDTO> findPage(Integer page, Integer linesPage, String direction, String orderBy) {
+		PageRequest pageRequest = PageRequest.of(page, linesPage, Direction.valueOf(direction), orderBy);
+		Page<Category> pages = repository.findAll(pageRequest);
 		return pages.map(x -> new CategoryDTO(x));
 	}
+
 	public Category fromDTO(CategoryDTO objDTO) {
-		return new Category(objDTO.getId(),objDTO.getName());
-		
+		return new Category(objDTO.getId(), objDTO.getName());
+
 	}
-	
+
 	private void updateData(Category newObj, Category obj) {
 		newObj.setName(obj.getName());
 	}

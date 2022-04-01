@@ -10,12 +10,14 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.tsa.ApiMC.entities.enums.PaymentStatus;
 
 @Entity
+@Table(name = "Payment")
 @Inheritance(strategy = InheritanceType.JOINED)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
 public abstract class Payment implements Serializable {
@@ -27,18 +29,18 @@ public abstract class Payment implements Serializable {
 
 	@JsonIgnore
 	@OneToOne
-	@JoinColumn(name = "Request_id")
+	@JoinColumn(name = "Order_id")
 	@MapsId
-	private Request request;
+	private Order order;
 	
 	public Payment() {
 	}
 
-	public Payment(Integer id, PaymentStatus status, Request request) {
+	public Payment(Integer id, PaymentStatus status, Order order) {
 		super();
 		this.id = id;
 		this.status = (status == null) ? null : status.getCod();
-		this.request = request;
+		this.order = order;
 	}
 
 	public Integer getId() {
@@ -57,12 +59,12 @@ public abstract class Payment implements Serializable {
 		this.status = status.getCod();
 	}
 
-	public Request getRequest() {
-		return request;
+	public Order getOrder() {
+		return order;
 	}
 
-	public void setRequest(Request request) {
-		this.request = request;
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
 	@Override

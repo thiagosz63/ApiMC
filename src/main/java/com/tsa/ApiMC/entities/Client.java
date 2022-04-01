@@ -16,11 +16,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tsa.ApiMC.entities.enums.ClientType;
 
 @Entity
+@Table(name = "Client")
 public class Client implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -33,7 +35,7 @@ public class Client implements Serializable {
 	private String cpfOuCnpj;
 	private Integer type;
 
-	@OneToMany(mappedBy = "client",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
 	private List<Address> address = new ArrayList<>();
 
 	@ElementCollection
@@ -42,7 +44,7 @@ public class Client implements Serializable {
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "client")
-	private List<Request> request = new ArrayList<>();
+	private List<Order> order = new ArrayList<>();
 
 	public Client() {
 	}
@@ -104,8 +106,8 @@ public class Client implements Serializable {
 		return fone;
 	}
 
-	public List<Request> getRequest() {
-		return request;
+	public List<Order> getOrder() {
+		return order;
 	}
 
 	@Override

@@ -16,7 +16,7 @@ import com.tsa.ApiMC.entities.Payment;
 import com.tsa.ApiMC.entities.PaymentBillet;
 import com.tsa.ApiMC.entities.PaymentCard;
 import com.tsa.ApiMC.entities.Product;
-import com.tsa.ApiMC.entities.Request;
+import com.tsa.ApiMC.entities.Order;
 import com.tsa.ApiMC.entities.State;
 import com.tsa.ApiMC.entities.enums.ClientType;
 import com.tsa.ApiMC.entities.enums.PaymentStatus;
@@ -27,7 +27,7 @@ import com.tsa.ApiMC.repository.ClientRepository;
 import com.tsa.ApiMC.repository.OrderItemRepository;
 import com.tsa.ApiMC.repository.PaymentRepository;
 import com.tsa.ApiMC.repository.ProductRepository;
-import com.tsa.ApiMC.repository.RequestRepository;
+import com.tsa.ApiMC.repository.OrderRepository;
 import com.tsa.ApiMC.repository.StateRepository;
 
 @Service
@@ -51,7 +51,7 @@ public class DBService {
 	private AddressRepository addressReposytory;
 
 	@Autowired
-	private RequestRepository requestRepository;
+	private OrderRepository orderRepository;
 
 	@Autowired
 	private PaymentRepository paymentRepository;
@@ -129,8 +129,8 @@ public class DBService {
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-		Request ped1 = new Request(null, sdf.parse("30/09/2017 10:32"), cli1, e1);
-		Request ped2 = new Request(null, sdf.parse("10/10/2017 19:35"), cli1, e2);
+		Order ped1 = new Order(null, sdf.parse("30/09/2017 10:32"), cli1, e1);
+		Order ped2 = new Order(null, sdf.parse("10/10/2017 19:35"), cli1, e2);
 
 		Payment pagto1 = new PaymentCard(null, PaymentStatus.Quitado, ped1, 6);
 		ped1.setPayment(pagto1);
@@ -138,9 +138,9 @@ public class DBService {
 		Payment pagto2 = new PaymentBillet(null, PaymentStatus.Pendente, ped2, sdf.parse("20/10/2017 00:00"), null);
 		ped2.setPayment(pagto2);
 
-		cli1.getRequest().addAll(Arrays.asList(ped1, ped2));
+		cli1.getOrder().addAll(Arrays.asList(ped1, ped2));
 
-		requestRepository.saveAll(Arrays.asList(ped1, ped2));
+		orderRepository.saveAll(Arrays.asList(ped1, ped2));
 		paymentRepository.saveAll(Arrays.asList(pagto1, pagto2));
 
 		OrderItem ip1 = new OrderItem(ped1, p1, 0.00, 1, 2000.00);

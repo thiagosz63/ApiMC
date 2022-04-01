@@ -24,13 +24,13 @@ import com.tsa.ApiMC.entities.Category;
 import com.tsa.ApiMC.service.CategoryService;
 
 @RestController
-@RequestMapping(value = "/categories")
+@RequestMapping(value = "/category")
 public class CategoryController {
 
 	@Autowired
 	private CategoryService service;
 
-	@GetMapping(value = "/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Category> find(@PathVariable Integer id) {
 		Category obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
@@ -44,7 +44,7 @@ public class CategoryController {
 		return ResponseEntity.created(uri).build();
 	}
 
-	@PutMapping(value = "/{id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<Void> update(@Valid @RequestBody CategoryDTO objDTO, @PathVariable Integer id) {
 		Category obj = service.fromDTO(objDTO);
 		obj.setId(id);
@@ -52,7 +52,7 @@ public class CategoryController {
 		return ResponseEntity.noContent().build();
 	}
 
-	@DeleteMapping(value = "/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
@@ -64,7 +64,7 @@ public class CategoryController {
 		return ResponseEntity.ok().body(list);
 	}
 
-	@GetMapping(value = "/page")
+	@GetMapping("/page")
 	public ResponseEntity<Page<CategoryDTO>> findPage(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPage", defaultValue = "24") Integer linesPage,

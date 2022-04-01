@@ -1,11 +1,13 @@
 package com.tsa.ApiMC.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.tsa.ApiMC.entities.enums.PaymentStatus;
 
 @Entity
+@Table(name = "PaymentCard")
 @JsonTypeName("pagamentoComCartao")
 public class PaymentCard extends Payment {
 
@@ -16,8 +18,8 @@ public class PaymentCard extends Payment {
 	public PaymentCard() {
 	}
 
-	public PaymentCard(Integer id, PaymentStatus status, Request request, Integer numeroDeParcelas) {
-		super(id, status, request);
+	public PaymentCard(Integer id, PaymentStatus status, Order order, Integer numeroDeParcelas) {
+		super(id, status, order);
 		this.numeroDeParcelas = numeroDeParcelas;
 	}
 

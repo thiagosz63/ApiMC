@@ -1,8 +1,11 @@
 package com.tsa.ApiMC.entities;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 
@@ -15,11 +18,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-public class Request implements Serializable {
+@Table(name = "`ORDER`")
+public class Order implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -30,7 +35,7 @@ public class Request implements Serializable {
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private Date instante;
 
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "request")
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "order")
 	private Payment payment;
 
 	@ManyToOne
@@ -38,15 +43,16 @@ public class Request implements Serializable {
 	private Client client;
 
 	@ManyToOne
-	@JoinColumn(name = "enderecoEnrega_id")
+	@JoinColumn(name = "endereco_Entrega_id")
 	private Address enderecoEntrega;
-	@OneToMany(mappedBy = "id.request")
+	
+	@OneToMany(mappedBy = "id.order")
 	private Set<OrderItem> itens = new HashSet<>();
 
-	public Request() {
+	public Order() {
 	}
 
-	public Request(Integer id, Date instante, Client client, Address enderecoEntrega) {
+	public Order(Integer id, Date instante, Client client, Address enderecoEntrega) {
 		super();
 		this.id = id;
 		this.instante = instante;
@@ -118,7 +124,30 @@ public class Request implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Request other = (Request) obj;
+		Order other = (Order) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	@Override
+	public String toString() {
+		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+		SimpleDateFormat sds = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+		StringBuilder builder = new StringBuilder();
+		builder.append("Pedido número ");
+		builder.append(getId());
+		builder.append(", Instante: ");
+		builder.append(sds.format(getInstante()));
+		builder.append(", Cliente: ");
+		builder.append(getClient().getName());
+		builder.append(", Situação do Pagamento: ");
+		builder.append(getPayment().getStatus().getDescription());
+		builder.append("\nDetalhes:\n");
+		for(OrderItem or : getItens()) {
+			builder.append(or.toString());
+		}
+		builder.append("Valor Total: ");
+		builder.append(nf.format(getValorTotal()));
+		return builder.toString();
+	}
+	
 }

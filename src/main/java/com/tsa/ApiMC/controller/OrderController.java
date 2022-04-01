@@ -14,23 +14,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.tsa.ApiMC.entities.Request;
-import com.tsa.ApiMC.service.RequestService;
+import com.tsa.ApiMC.entities.Order;
+import com.tsa.ApiMC.service.OrderService;
 
 @RestController
-@RequestMapping(value = "/request")
-public class RequestController {
+@RequestMapping(value = "/order")
+public class OrderController {
 	
 	@Autowired
-	private RequestService service;
+	private OrderService service;
 
-	@GetMapping(value = "/{id}")
-	public ResponseEntity<Request> find(@PathVariable Integer id) {
-		Request obj = service.find(id);
+	@GetMapping("/{id}")
+	public ResponseEntity<Order> find(@PathVariable Integer id) {
+		Order obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	@PostMapping
-	public ResponseEntity<Void> insert(@Valid @RequestBody Request obj) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody Order obj) {
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();

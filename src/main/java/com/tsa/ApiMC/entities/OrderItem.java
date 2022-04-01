@@ -1,14 +1,18 @@
 package com.tsa.ApiMC.entities;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Objects;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name = "OrderItem")
 public class OrderItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -22,9 +26,9 @@ public class OrderItem implements Serializable {
 	public OrderItem() {
 	}
 
-	public OrderItem(Request request, Product product, Double desconto, Integer quantidade, Double preco) {
+	public OrderItem(Order order, Product product, Double desconto, Integer quantidade, Double preco) {
 		super();
-		id.setRequest(request);
+		id.setOrder(order);
 		id.setProduct(product);
 		this.desconto = desconto;
 		this.quantidade = quantidade;
@@ -35,11 +39,11 @@ public class OrderItem implements Serializable {
 	}
 
 	@JsonIgnore
-	public Request getRequest() {
-		return id.getRequest();
+	public Order getOrder() {
+		return id.getOrder();
 	}
-	public void setRequest(Request request) {
-		id.setRequest(request);
+	public void setOrder(Order order) {
+		id.setOrder(order);
 	}
 
 	public Product getProduct() {
@@ -96,5 +100,20 @@ public class OrderItem implements Serializable {
 			return false;
 		OrderItem other = (OrderItem) obj;
 		return Objects.equals(id, other.id);
+	}
+
+	@Override
+	public String toString() {
+		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+		StringBuilder builder = new StringBuilder();
+		builder.append(getProduct().getName());
+		builder.append(", Qte: ");
+		builder.append(getQuantidade());
+		builder.append(", Preço Unitário: ");
+		builder.append(nf.format(getPreco()));
+		builder.append(", Subtotal: ");
+		builder.append(nf.format(getSubTotal()));
+		builder.append("\n");
+		return builder.toString();
 	}
 }

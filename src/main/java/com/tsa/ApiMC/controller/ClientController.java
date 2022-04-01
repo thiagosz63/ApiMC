@@ -25,13 +25,13 @@ import com.tsa.ApiMC.entities.Client;
 import com.tsa.ApiMC.service.ClientService;
 
 @RestController
-@RequestMapping(value = "/clients")
+@RequestMapping(value = "/client")
 public class ClientController {
 	
 	@Autowired
 	private ClientService service;
 
-	@GetMapping(value = "/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Client> find(@PathVariable Integer id) {
 		Client obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
@@ -45,7 +45,7 @@ public class ClientController {
 		return ResponseEntity.created(uri).build();
 	}
 	
-	@PutMapping(value = "/{id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<Void> update(@Valid @RequestBody ClientDTO objDTO, @PathVariable Integer id) {
 		Client obj = service.fromDTO(objDTO);
 		obj.setId(id);
@@ -53,7 +53,7 @@ public class ClientController {
 		return ResponseEntity.noContent().build();
 	}
 
-	@DeleteMapping(value = "/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
@@ -65,7 +65,7 @@ public class ClientController {
 		return ResponseEntity.ok().body(list);
 	}
 
-	@GetMapping(value = "/page")
+	@GetMapping("/page")
 	public ResponseEntity<Page<ClientDTO>> findPage(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPage", defaultValue = "24") Integer linesPage,

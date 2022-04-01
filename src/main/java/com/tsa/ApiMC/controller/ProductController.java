@@ -23,13 +23,13 @@ public class ProductController {
 	@Autowired
 	private ProductService service;
 
-	@GetMapping(value = "/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Product> find(@PathVariable Integer id) {
 		Product obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	@GetMapping()
+	@GetMapping
 	public ResponseEntity<Page<ProductDTO>> findPage(
 			@RequestParam(value = "name", defaultValue = "") String name,
 			@RequestParam(value = "categorias", defaultValue = "") String categorias,

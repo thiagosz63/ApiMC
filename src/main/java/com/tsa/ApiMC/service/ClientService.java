@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tsa.ApiMC.dto.ClientDTO;
 import com.tsa.ApiMC.dto.ClientNewDTO;
@@ -30,24 +31,28 @@ public class ClientService {
 	@Autowired
 	private AddressRepository addressRepository;
 
+	@Transactional(readOnly = true)
 	public Client find(Integer id) {
 		Optional<Client> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"objeto não encontrado! id:" + id + " Tipo: " + Client.class.getName()));
 	}
 
+	@Transactional
 	public Client insert(Client obj) {
 			obj = repository.save(obj);
 			addressRepository.saveAll(obj.getAddress());
 			return obj;
 	}
 
+	@Transactional
 	public Client update(Client obj) {
 		Client newObj = find(obj.getId());
 		updateData(newObj, obj);
 		return repository.save(newObj);
 	}
 
+	@Transactional
 	public void delete(Integer id) {
 		find(id);
 		try {
@@ -57,11 +62,13 @@ public class ClientService {
 		}
 	}
 
+	@Transactional(readOnly = true)
 	public List<ClientDTO> findAll() {
 		List<Client> list = repository.findAll();
 		return list.stream().map(x -> new ClientDTO(x)).collect(Collectors.toList());
 	}
 
+	@Transactional(readOnly = true)
 	public Page<ClientDTO> findPage(Integer page, Integer linesPage, String direction, String orderBy) {
 		PageRequest pageRequest = PageRequest.of(page, linesPage, Direction.valueOf(direction), orderBy);
 		Page<Client> pages = repository.findAll(pageRequest);

@@ -3,12 +3,14 @@ package com.tsa.ApiMC.entities;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.tsa.ApiMC.entities.enums.PaymentStatus;
 
 @Entity
+@Table(name = "PaymentBillet")
 @JsonTypeName("pagamentoComBoleto")
 public class PaymentBillet extends Payment {
 
@@ -22,8 +24,8 @@ public class PaymentBillet extends Payment {
 	public PaymentBillet() {
 	}
 
-	public PaymentBillet(Integer id, PaymentStatus status, Request request, Date dataVencimento, Date dataPagamento) {
-		super(id, status, request);
+	public PaymentBillet(Integer id, PaymentStatus status, Order order, Date dataVencimento, Date dataPagamento) {
+		super(id, status, order);
 		this.dataVencimento = dataVencimento;
 		this.dataPagamento = dataPagamento;
 	}

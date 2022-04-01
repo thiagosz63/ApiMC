@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tsa.ApiMC.dto.ProductDTO;
 import com.tsa.ApiMC.entities.Category;
@@ -21,22 +22,25 @@ public class ProductService {
 
 	@Autowired
 	private ProductRepository repository;
-	
+
 	@Autowired
 	private CategoryRepository categoryRepository;
 
+	@Transactional(readOnly = true)
 	public Product find(Integer id) {
 		Optional<Product> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"objeto não encontrado! id:" + id + " Tipo: " + Product.class.getName()));
 	}
-	
-	public Page<ProductDTO> search(String nome, List<Integer> ids,Integer page, Integer linesPage, String direction, String orderBy){
-		PageRequest pageRequest = PageRequest.of(page, linesPage,Direction.valueOf(direction), orderBy);
+
+	@Transactional(readOnly = true)
+	public Page<ProductDTO> search(String nome, List<Integer> ids, Integer page, Integer linesPage, String direction,
+			String orderBy) {
+		PageRequest pageRequest = PageRequest.of(page, linesPage, Direction.valueOf(direction), orderBy);
 		List<Category> categorias = categoryRepository.findAllById(ids);
-		Page<Product> product = repository.findDistinctByNameContainingAndCategoriesIn(nome,categorias,pageRequest);
-		return product.map(x-> new ProductDTO(x));
-		
+		Page<Product> product = repository.findDistinctByNameContainingAndCategoriesIn(nome, categorias, pageRequest);
+		return product.map(x -> new ProductDTO(x));
+
 	}
 
 }
