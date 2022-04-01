@@ -40,6 +40,9 @@ public class OrderService {
 	
 	@Autowired
 	private ClientService clientService;
+	
+	@Autowired
+	private EmailService emailService;
 
 	@Transactional(readOnly = true)
 	public Order find(Integer id) {
@@ -69,7 +72,7 @@ public class OrderService {
 			orderItem.setOrder(obj);
 		}
 		orderItemRepository.saveAll(obj.getItens());
-		System.out.println(obj);
+		emailService.sendOrderConfirmationEmail(obj);
 		return obj;
 
 	}
