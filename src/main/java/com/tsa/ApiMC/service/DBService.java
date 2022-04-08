@@ -21,6 +21,7 @@ import com.tsa.ApiMC.entities.Order;
 import com.tsa.ApiMC.entities.State;
 import com.tsa.ApiMC.entities.enums.ClientType;
 import com.tsa.ApiMC.entities.enums.PaymentStatus;
+import com.tsa.ApiMC.entities.enums.Perfil;
 import com.tsa.ApiMC.repository.AddressRepository;
 import com.tsa.ApiMC.repository.CategoryRepository;
 import com.tsa.ApiMC.repository.CityRepository;
@@ -122,14 +123,20 @@ public class DBService {
 
 		Client cli1 = new Client(null, "Maria Silva", "thiagosz63@gmail.com", "36378912377", ClientType.PessoaFisica,bCryptPasswordEncoder.encode("123"));
 		cli1.getFone().addAll(Arrays.asList("27368954", "872524552"));
-
+		
+		Client cli2 = new Client(null, "Sophya Jackson", "thiagosz63@hotmail.com", "24624123018", ClientType.PessoaFisica,bCryptPasswordEncoder.encode("123"));
+		cli2.getFone().addAll(Arrays.asList("27368956", "872525852"));
+		cli2.addPerfis(Perfil.ADMIM);
+		
 		Address e1 = new Address(null, "Rua Flores", "300", "Apto 203", "jardim", "98959484784", cli1, c1);
 		Address e2 = new Address(null, "Avenida Matos", "105", "Sala 800", "centro", "9858249698", cli1, c2);
+		Address e3 = new Address(null, "Avenida Floriano", "305", null, "centro", "23232343424", cli2, c2);
 
 		cli1.getAddress().addAll(Arrays.asList(e1, e2));
+		cli2.getAddress().addAll(Arrays.asList(e3));
 
-		clientReposytory.saveAll(Arrays.asList(cli1));
-		addressReposytory.saveAll(Arrays.asList(e1, e2));
+		clientReposytory.saveAll(Arrays.asList(cli1,cli2));
+		addressReposytory.saveAll(Arrays.asList(e1, e2,e3));
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
