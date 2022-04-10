@@ -6,18 +6,24 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tsa.ApiMC.entities.Client;
+import com.tsa.ApiMC.entities.Order;
 import com.tsa.ApiMC.entities.OrderItem;
 import com.tsa.ApiMC.entities.PaymentBillet;
 import com.tsa.ApiMC.entities.Product;
-import com.tsa.ApiMC.entities.Order;
 import com.tsa.ApiMC.entities.enums.PaymentStatus;
 import com.tsa.ApiMC.repository.OrderItemRepository;
+import com.tsa.ApiMC.repository.OrderRepository;
 import com.tsa.ApiMC.repository.PaymentRepository;
 import com.tsa.ApiMC.repository.ProductRepository;
-import com.tsa.ApiMC.repository.OrderRepository;
+import com.tsa.ApiMC.security.UserSS;
+import com.tsa.ApiMC.service.exceptions.AuthorizationExeption;
 import com.tsa.ApiMC.service.exceptions.ObjectNotFoundException;
 
 @Service
@@ -77,6 +83,19 @@ public class OrderService {
 		
 		return obj;
 
+	}
+	@Transactional(readOnly = true)
+	public Page<Order> findPage(Integer page, Integer linesPage, String direction, String orderBy) {
+		
+		UserSS userSS = UserService.authenticated();
+		if(userSS == null) {
+			throw new AuthorizationExeption("Acesso negado");
+		}
+		PageRequest pageRequest = PageRequest.of(page, linesPage, Direction.valueOf(direction), orderBy);
+		
+		Client client = clientService.find(userSS.getId());
+		return  repository.findByClient(client, pageRequest);
+	
 	}
 
 }
