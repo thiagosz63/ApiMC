@@ -126,7 +126,7 @@ public class DBService {
 		
 		Client cli2 = new Client(null, "Sophya Jackson", "thiagosz63@hotmail.com", "24624123018", ClientType.PessoaFisica,bCryptPasswordEncoder.encode("123"));
 		cli2.getFone().addAll(Arrays.asList("27368956", "872525852"));
-		cli2.addPerfis(Perfil.ADMIM);
+		cli2.addPerfis(Perfil.ADMIN);
 		
 		Address e1 = new Address(null, "Rua Flores", "300", "Apto 203", "jardim", "98959484784", cli1, c1);
 		Address e2 = new Address(null, "Avenida Matos", "105", "Sala 800", "centro", "9858249698", cli1, c2);

@@ -19,8 +19,11 @@ import com.tsa.ApiMC.entities.Address;
 import com.tsa.ApiMC.entities.City;
 import com.tsa.ApiMC.entities.Client;
 import com.tsa.ApiMC.entities.enums.ClientType;
+import com.tsa.ApiMC.entities.enums.Perfil;
 import com.tsa.ApiMC.repository.AddressRepository;
 import com.tsa.ApiMC.repository.ClientRepository;
+import com.tsa.ApiMC.security.UserSS;
+import com.tsa.ApiMC.service.exceptions.AuthorizationExeption;
 import com.tsa.ApiMC.service.exceptions.DataIntegrityException;
 import com.tsa.ApiMC.service.exceptions.ObjectNotFoundException;
 
@@ -36,6 +39,13 @@ public class ClientService {
 
 	@Transactional(readOnly = true)
 	public Client find(Integer id) {
+		
+		UserSS userSS = UserService.authenticated();
+		if(userSS == null || !userSS.hasRole(Perfil.ADMIN) && !id.equals(userSS.getId())) {
+			throw new AuthorizationExeption("Acesso negado");
+		}
+		
+		
 		Optional<Client> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"objeto não encontrado! id:" + id + " Tipo: " + Client.class.getName()));
