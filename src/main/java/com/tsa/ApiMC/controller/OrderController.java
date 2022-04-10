@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.tsa.ApiMC.dto.CategoryDTO;
 import com.tsa.ApiMC.entities.Order;
 import com.tsa.ApiMC.service.OrderService;
 
