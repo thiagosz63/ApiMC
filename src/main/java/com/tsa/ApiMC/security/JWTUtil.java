@@ -20,7 +20,6 @@ public class JWTUtil {
 	public String generateToken(String userName) {
 		return Jwts.builder().setSubject(userName).setExpiration(new Date(System.currentTimeMillis() + expiration))
 				.signWith(SignatureAlgorithm.HS512, secret.getBytes()).compact();
-
 	}
 
 	public boolean tokenValido(String token) {
@@ -43,7 +42,6 @@ public class JWTUtil {
 			} catch (Exception e) {
 				return null;
 			}
-
 	}
 
 	public String getUserName(String token) {
