@@ -1,0 +1,553 @@
+{
+	"info": {
+		"_postman_id": "0c9c145f-c51e-4734-af86-efa0e4e5a655",
+		"name": "ApiMc",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "All category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/category",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All client",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0aGlhZ29zejYzQGdtYWlsLmNvbSIsImV4cCI6MTY0OTYxNjUyM30.wLMyJpwsp6IfoOgbUyJyNfaY3NcLhJScttKiRMs_Onchh4Z1-MZ_uRQ-kaMikE7MD9Rzds-ggFYWSsxPKlkdcg",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/client/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"client",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reflex token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0aGlhZ29zejYzQGhvdG1haWwuY29tIiwiZXhwIjoxNjQ5NjI1Nzc5fQ.d76Y5bJUjUJRnBVn0kxn0jzEsdTbkJlRvidyLxLqGQgPcIGYaMPbAdurx7LFGJrNBCjvOYEl_93OebOF-6yHHA",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/auth/refresh_token?Aut",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"refresh_token"
+					],
+					"query": [
+						{
+							"key": "Aut",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "category by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0aGlhZ29zejYzQGhvdG1haWwuY29tIiwiZXhwIjoxNjQ5NjE2MzcwfQ.XqFUoTsnX-JaNTg57cJqRqqpJu7vaT9cDxFbrC-zlZ4TLmJQnlmOjlpbZ67N_yAvkH7q5IUKhRveo98m5mWL5A",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/category/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"category",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "order by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0aGlhZ29zejYzQGdtYWlsLmNvbSIsImV4cCI6MTY0OTcyNDg3Mn0._DBgQ0aYKkfg2wcsg8lrAZTDPxC-1VtosDbeED5m_TUprgEFcOnkdYZ_zWQDTwoR1RXupLmIL8jdCVSGemG0eQ",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/order/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "order by page",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0aGlhZ29zejYzQGhvdG1haWwuY29tIiwiZXhwIjoxNjQ5NjIyNTA3fQ.JJK7UvmMtKqNVMZGCmcqUhV2itPZp6xPPMPTO-E5eWfV2QFyoxN96B1bGeNeSJltuqtQ4pWERWKxewa_7DnYCg",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "client  by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/client/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"client",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "client  by email",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0aGlhZ29zejYzQGdtYWlsLmNvbSIsImV4cCI6MTY0OTcyMTc0Nn0.A_BFm2XvEs0lTub-CYcJdnCx5A6RjEwoxt26RD1wIf6ZOv4_tUi6RlAzsuHITpJC3YbfR1hV8SHkE4aHLKA5Ew",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/client/email/thiagosz63@gmail.com",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"client",
+						"email",
+						"thiagosz63@gmail.com"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "category by page",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/categories/page?linesPage=3&page=1&direction=DESC",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"categories",
+						"page"
+					],
+					"query": [
+						{
+							"key": "linesPage",
+							"value": "3"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "direction",
+							"value": "DESC"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "product by page",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/product/?name=or&categorias=1,4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "or"
+						},
+						{
+							"key": "categorias",
+							"value": "1,4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "client by page",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/clients/page?linesPage=3&page=0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clients",
+						"page"
+					],
+					"query": [
+						{
+							"key": "linesPage",
+							"value": "3"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "client update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Sophya jackson\",\r\n    \"email\" : \"joao@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/clients/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clients",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "client delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Sophya jackson\",\r\n    \"email\" : \"sophya@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/clients/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clients",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "client insert",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0aGlhZ29zejYzQGdtYWlsLmNvbSIsImV4cCI6MTY0OTcyNTgxNn0.3agEagcWxnqexOI2suJ-2AUySoRUERMyWctrefVFIvWoFq6P-jgVPDYESPg7DV4619oVyytxSIokc2R6cBGDMg",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n            \"name\" : \"joao da silva\",\r\n            \"email\" : \"joao@gmail.com\",\r\n            \"cpfOuCnpj\": \"91623894085\",\r\n             \"type\" : 1,\r\n            \"logradouro\" : \"Rua das acacias\",\r\n            \"number\" : \"345\",\r\n            \"complemento\" :\"apat 302\",\r\n            \"cep\" : \"2525252525\",\r\n            \"fone1\" : \"081925252524\",\r\n            \"fone2\" : \"085935352925\",\r\n            \"cityId\" : 2,\r\n            \"senha\" : \"125\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/client",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"client"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "recupera senha",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n           \r\n            \"email\" : \"thiagosz63@gmail.com\"\r\n           \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/auth/forgot",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"auth",
+						"forgot"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n            \"email\" : \"thiagosz63@hotmail.com\",\r\n            \"senha\" : \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "category insert",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0aGlhZ29zejYzQGhvdG1haWwuY29tIiwiZXhwIjoxNjQ5NjE0Mzc3fQ.lbFQdL4TX4qlbVuc3Yhp-tXx-BOzGbBzDwqd0mdx3C5YXl2EgwX4t_9Yhv8amXBR_-g2LQKlpqJMPejcYgIWeA",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"sdsdafd\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/category",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"category"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "category update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0aGlhZ29zejYzQGhvdG1haWwuY29tIiwiZXhwIjoxNjQ5NzI2ODI5fQ.Vtn3AwGQKf23E-zKlxsiAmTuZ363dz2rljJ5LcDZhoB3d5CbT6cGvxC0GSh93V7DtGcsjst_8se2517X3etU3Q",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"lelefdf\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/category/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"category",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "order insert",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"client\": {\r\n        \"id\": 1\r\n    },\r\n    \"enderecoEntrega\": {\r\n        \"id\": 1\r\n    },\r\n    \"payment\": {\r\n        \"numeroDeParcelas\": 10,\r\n        \"@type\": \"pagamentoComCartao\"\r\n    },\r\n    \"itens\": [\r\n        {\r\n            \"quantidade\": 2,\r\n            \"product\": {\r\n                \"id\": 3\r\n            }\r\n        },\r\n        {\r\n            \"quantidade\": 1,\r\n            \"product\": {\r\n                \"id\": 1\r\n            }\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

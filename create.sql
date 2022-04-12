@@ -37,11 +37,12 @@
         cpfOuCnpj varchar(255),
         email varchar(255),
         name varchar(255),
+        senha varchar(255),
         type integer,
         primary key (id)
     ) engine=InnoDB;
 
-    create table fone (
+    create table FONE (
        Client_id integer not null,
         fone varchar(255)
     ) engine=InnoDB;
@@ -72,6 +73,11 @@
        numeroDeParcelas integer,
         Order_id integer not null,
         primary key (Order_id)
+    ) engine=InnoDB;
+
+    create table PERFIS (
+       Client_id integer not null,
+        perfis integer
     ) engine=InnoDB;
 
     create table Product (
@@ -120,8 +126,8 @@
        foreign key (state_id) 
        references State (id);
 
-    alter table fone 
-       add constraint FKoo64oqsyfa0uv8ri70xpjuhpg 
+    alter table FONE 
+       add constraint FKg1xdv08nsoo9h0pny8gy5n1jk 
        foreign key (Client_id) 
        references Client (id);
 
@@ -149,6 +155,11 @@
        add constraint FK8gjn81csngc10ulms2vk819k5 
        foreign key (Order_id) 
        references Payment (Order_id);
+
+    alter table PERFIS 
+       add constraint FK9i45ar19est17p13xwhhx0mpe 
+       foreign key (Client_id) 
+       references Client (id);
 
     alter table PRODUCT_CATEGORY 
        add constraint FK7h07ab4db1iqwop3mlar0vqfc 
