@@ -39,18 +39,28 @@ public class ClientService {
 
 	@Transactional(readOnly = true)
 	public Client find(Integer id) {
-		
 		UserSS userSS = UserService.authenticated();
 		if(userSS == null || !userSS.hasRole(Perfil.ADMIN) && !id.equals(userSS.getId())) {
 			throw new AuthorizationExeption("Acesso negado");
 		}
-		
-		
 		Optional<Client> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"objeto não encontrado! id:" + id + " Tipo: " + Client.class.getName()));
 	}
 
+	@Transactional(readOnly = true)
+	public Client findByEmail(String email) {
+		UserSS userSS = UserService.authenticated();
+		if(userSS == null || !userSS.hasRole(Perfil.ADMIN) && !email.equals(userSS.getUsername())) {
+			throw new AuthorizationExeption("Acesso negado");
+		}
+		Client client = repository.findByEmail(email);
+		if(client == null) {
+			throw new ObjectNotFoundException("Email não encontrado!" + userSS.getUsername() + " Tipo: " + Client.class.getName());
+		}
+		return client;
+	}
+	
 	@Transactional
 	public Client insert(Client obj) {
 			obj = repository.save(obj);
