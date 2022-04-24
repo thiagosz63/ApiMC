@@ -36,9 +36,9 @@ public class CategoryController {
 		Category obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
-
-	@PostMapping
+	
 	@PreAuthorize("hasAnyRole('ADMIN')")
+	@PostMapping
 	public ResponseEntity<Void> insert(@Valid @RequestBody CategoryDTO objDTO) {
 		Category obj = service.fromDTO(objDTO);
 		obj = service.insert(obj);
@@ -46,8 +46,8 @@ public class CategoryController {
 		return ResponseEntity.created(uri).build();
 	}
 
-	@PutMapping("/{id}")
 	@PreAuthorize("hasAnyRole('ADMIN')")
+	@PutMapping("/{id}")
 	public ResponseEntity<Void> update(@Valid @RequestBody CategoryDTO objDTO, @PathVariable Integer id) {
 		Category obj = service.fromDTO(objDTO);
 		obj.setId(id);
@@ -55,8 +55,8 @@ public class CategoryController {
 		return ResponseEntity.noContent().build();
 	}
 
-	@DeleteMapping("/{id}")
 	@PreAuthorize("hasAnyRole('ADMIN')")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();

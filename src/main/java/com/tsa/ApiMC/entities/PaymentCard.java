@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.tsa.ApiMC.entities.enums.PaymentStatus;
 
 @Entity
-@Table(name = "Payment_Card")
+@Table(name = "`payment_card`")
 @JsonTypeName("pagamentoComCartao")
 public class PaymentCard extends Payment {
 

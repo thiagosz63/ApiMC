@@ -25,7 +25,7 @@ import com.tsa.ApiMC.entities.enums.ClientType;
 import com.tsa.ApiMC.entities.enums.Perfil;
 
 @Entity
-@Table(name = "Client")
+@Table(name = "`client`")
 public class Client implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -44,11 +44,12 @@ public class Client implements Serializable {
 	private List<Address> address = new ArrayList<>();
 
 	@ElementCollection
-	@CollectionTable(name = "FONE")
+	@CollectionTable(name = "`fone`")
 	private Set<String> fone = new HashSet<>();
 	
+	@JsonIgnore
 	@ElementCollection(fetch=FetchType.EAGER)
-	@CollectionTable(name = "PERFIS")
+	@CollectionTable(name = "`perfis`")
 	private Set<Integer> perfis = new HashSet<>();
 
 	@JsonIgnore

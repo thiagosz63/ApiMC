@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "Order_Item")
+@Table(name = "`order_item`")
 public class OrderItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;

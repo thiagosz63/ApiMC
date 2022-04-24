@@ -45,11 +45,11 @@ public class ClientController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> insert(@Valid @RequestBody ClientNewDTO objDTO) {
+	public ResponseEntity<String> insert(@Valid @RequestBody ClientNewDTO objDTO) {
 		Client obj = service.fromDTO(objDTO);
 		obj = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).build();
+		return ResponseEntity.created(uri).body("Cliente adicionado com sucesso, URI = " + uri);
 	}
 	
 	@PutMapping("/{id}")
@@ -60,25 +60,22 @@ public class ClientController {
 		return ResponseEntity.noContent().build();
 	}
 
-	
-	@DeleteMapping("/{id}")
 	@PreAuthorize("hasAnyRole('ADMIN')")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 
-	
-	@GetMapping
 	@PreAuthorize("hasAnyRole('ADMIN')")
+	@GetMapping
 	public ResponseEntity<List<ClientDTO>> findAll() {
 		List<ClientDTO> list = service.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 
-	
-	@GetMapping("/page")
 	@PreAuthorize("hasAnyRole('ADMIN')")
+	@GetMapping("/page")
 	public ResponseEntity<Page<ClientDTO>> findPage(
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPage", defaultValue = "24") Integer linesPage,

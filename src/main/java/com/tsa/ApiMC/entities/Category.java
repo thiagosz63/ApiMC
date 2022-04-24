@@ -13,7 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Category")
+@Table(name = "`category`")
 public class Category implements Serializable {
 	private static final long serialVersionUID = 1L;
 

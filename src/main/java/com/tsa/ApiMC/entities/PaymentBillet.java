@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.tsa.ApiMC.entities.enums.PaymentStatus;
 
 @Entity
-@Table(name = "Payment_Billet")
+@Table(name = "`payment_billet`")
 @JsonTypeName("pagamentoComBoleto")
 public class PaymentBillet extends Payment {
 
